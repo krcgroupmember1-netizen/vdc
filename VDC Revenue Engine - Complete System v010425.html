@@ -1,0 +1,2108 @@
+<!DOCTYPE html>
+<!-- saved from url=(0099)file:///C:/Users/trmnd/Downloads/VDC%20Revenue%20Engine%20-%20Complete%20System.html%20v010425.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VDC Revenue Engine - Complete System</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        /* TAB SYSTEM */
+        .tab-navigation {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            display: flex;
+            justify-content: center;
+            gap: 0;
+            padding: 0 30px 20px;
+        }
+        
+        .tab-button {
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .tab-button:first-child { border-radius: 10px 0 0 0; }
+        .tab-button:last-child { border-radius: 0 10px 0 0; }
+        .tab-button:hover {
+            background: rgba(255,255,255,0.2);
+            color: white;
+        }
+        
+        .tab-button.active {
+            background: white;
+            color: #1e3c72;
+            border-bottom: 3px solid #ffc107;
+        }
+        
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* CALCULATOR TAB STYLES */
+        .content { padding: 40px 30px; }
+        
+        .mode-toggle {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+        
+        .toggle-container {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #f0f0f0;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .toggle-container:hover { background: #e0e0e0; }
+        .toggle-container.active {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border: 2px solid #667eea;
+        }
+        
+        .revenue-selection {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .revenue-selection h2 {
+            color: #1e3c72;
+            margin-bottom: 10px;
+            font-size: 1.8em;
+        }
+        
+        .revenue-subtitle {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 0.95em;
+        }
+        
+        .revenue-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .revenue-item:hover { border-color: #667eea; }
+        .revenue-item.selected {
+            border-color: #667eea;
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
+        }
+        
+        .revenue-header {
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .revenue-header input[type="radio"] {
+            width: 22px;
+            height: 22px;
+            margin-right: 15px;
+            cursor: pointer;
+        }
+        
+        .revenue-name {
+            flex: 1;
+            font-weight: 600;
+            font-size: 1.1em;
+            color: #333;
+        }
+        
+        .revenue-display {
+            color: #667eea;
+            font-weight: 700;
+            font-size: 1.1em;
+        }
+        
+        .config-panel {
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-top: 2px solid #e0e0e0;
+            display: none;
+        }
+        
+        .config-panel.visible { display: block; }
+        
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .config-field { display: flex; flex-direction: column; }
+        .config-field label {
+            font-weight: 600;
+            color: #555;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        
+        .config-field input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1.05em;
+            background: #f5f5f5;
+            transition: all 0.3s ease;
+        }
+        
+        .config-field input:disabled { cursor: not-allowed; color: #888; }
+        .config-field input.admin-enabled {
+            background: white;
+            border-color: #667eea;
+            cursor: text;
+            color: #333;
+        }
+        
+        .config-field input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .calculation-display {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px dashed #28a745;
+            text-align: center;
+        }
+        
+        .calculation-formula {
+            color: #666;
+            font-size: 1em;
+            margin-bottom: 10px;
+        }
+        
+        .calculation-result {
+            color: #28a745;
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .calculation-note {
+            color: #28a745;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .selected-summary {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .selected-summary-value {
+            color: #1e3c72;
+            font-size: 1.5em;
+            font-weight: 700;
+        }
+        
+        .team-inputs {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .team-inputs h2 {
+            color: #1e3c72;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        .input-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .input-field { display: flex; flex-direction: column; }
+        .input-field label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #333;
+        }
+        
+        .input-field input {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .input-field input:read-only {
+            background: #f8f9fa;
+            cursor: not-allowed;
+        }
+        
+        .calculate-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .calculate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        .level-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .level-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+        
+        .level-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .level-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3c72;
+        }
+        
+        .level-contract {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: 600;
+        }
+        
+        .level-requirements {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        
+        .level-requirements ul { margin-left: 20px; color: #555; }
+        
+        .income-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 15px;
+            padding: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+        
+        .income-source { font-weight: 600; color: #333; }
+        .income-calculation { color: #666; font-size: 0.9em; }
+        .income-amount {
+            text-align: right;
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #667eea;
+        }
+        
+        .total-row {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border: 2px solid #667eea;
+            font-size: 1.1em;
+            margin-top: 10px;
+        }
+        
+        .total-row .income-source { color: #1e3c72; }
+        .total-row .income-amount {
+            color: #1e3c72;
+            font-size: 1.5em;
+        }
+        
+        .annual-projections {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .projection-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+        }
+        
+        .projection-label {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        
+        .projection-value {
+            font-size: 1.8em;
+            font-weight: 700;
+        }
+        
+        .disclaimer {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 12px;
+            padding: 25px;
+            margin-top: 40px;
+            color: #856404;
+        }
+        
+        .disclaimer h3 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .disclaimer p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+        
+        .disclaimer ul { margin-left: 20px; margin-top: 10px; }
+        .disclaimer li { margin-bottom: 8px; line-height: 1.6; }
+        
+        /* FRAMEWORK TAB STYLES */
+        .framework-content { padding: 40px 30px; }
+        
+        .framework-hero {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .framework-hero h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .framework-hero p {
+            font-size: 1.4em;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        .framework-hero .big-numbers {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .big-number {
+            text-align: center;
+        }
+        
+        .big-number-value {
+            font-size: 4em;
+            font-weight: 700;
+            color: #ffc107;
+        }
+        
+        .big-number-label {
+            font-size: 1.1em;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 20px 30px;
+            border-radius: 12px;
+            margin: 40px 0 30px;
+            font-size: 2em;
+        }
+        
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .comparison-card {
+            padding: 30px;
+            border-radius: 15px;
+            border: 3px solid;
+        }
+        
+        .comparison-card.bad {
+            background: #f8d7da;
+            border-color: #dc3545;
+        }
+        
+        .comparison-card.good {
+            background: #d4edda;
+            border-color: #28a745;
+        }
+        
+        .comparison-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-card.bad h3 { color: #721c24; }
+        .comparison-card.good h3 { color: #155724; }
+        
+        .breakdown-card {
+            background: white;
+            border: 3px solid;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+        
+        .breakdown-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+        
+        .breakdown-card.field { border-color: #667eea; }
+        .breakdown-card.culture { border-color: #ffc107; }
+        
+        .breakdown-percentage {
+            font-size: 4em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .breakdown-card.field .breakdown-percentage { color: #667eea; }
+        .breakdown-card.culture .breakdown-percentage { color: #ffc107; }
+        
+        .breakdown-title {
+            font-size: 1.8em;
+            font-weight: 600;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        
+        .breakdown-description {
+            color: #666;
+            font-size: 1.1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        
+        .breakdown-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        
+        .breakdown-details ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .breakdown-details li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            color: #555;
+        }
+        
+        .breakdown-details li:last-child { border-bottom: none; }
+        .breakdown-details li:before {
+            content: "✓ ";
+            color: #28a745;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        .callout-box {
+            background: linear-gradient(135deg, #667eea15, #764ba215);
+            border-left: 5px solid #667eea;
+            padding: 30px;
+            border-radius: 10px;
+            margin: 30px 0;
+            font-size: 1.2em;
+            color: #1e3c72;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+        
+        .objection-item {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .objection-q {
+            background: #fff3cd;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            color: #856404;
+            font-weight: 600;
+            font-size: 1.2em;
+        }
+        
+        .objection-a {
+            padding: 15px 20px;
+            background: #d4edda;
+            border-radius: 8px;
+            color: #155724;
+            line-height: 1.8;
+        }
+        
+        .objection-a strong {
+            color: #28a745;
+            font-size: 1.1em;
+        }
+        
+        .vision-section {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .vision-section h3 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        
+        .vision-section p {
+            font-size: 1.3em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        
+        .vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .vision-item {
+            background: rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .vision-item h4 {
+            font-size: 1.3em;
+            margin-bottom: 10px;
+        }
+        
+        .cta-final {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 60px 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .cta-final h3 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+        }
+        
+        .cta-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .cta-option {
+            background: white;
+            color: #333;
+            padding: 30px;
+            border-radius: 12px;
+        }
+        
+        .cta-option h4 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #1e3c72;
+        }
+        
+        .cta-option.bad {
+            border: 3px solid #dc3545;
+        }
+        
+        .cta-option.good {
+            border: 3px solid #28a745;
+        }
+        
+        .cta-option ul {
+            text-align: left;
+            margin: 20px 0;
+        }
+        
+        .cta-option li {
+            margin-bottom: 10px;
+        }
+        
+        .cta-button {
+            background: #ffc107;
+            color: #1e3c72;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.4em;
+            font-weight: 700;
+            border-radius: 12px;
+            cursor: pointer;
+            margin: 30px auto;
+            display: inline-block;
+            box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4);
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 193, 7, 0.6);
+        }
+        
+        .footer {
+            background: #1e3c72;
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .tab-button { padding: 12px 20px; font-size: 1em; }
+            .config-grid, .income-row { grid-template-columns: 1fr; }
+            .income-amount { text-align: left; }
+            .framework-hero h2 { font-size: 2em; }
+            .big-number-value { font-size: 2.5em; }
+            .comparison-grid, .cta-options { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💎 The VDC Success Blueprint</h1>
+            <p style="font-size: 1.1em; opacity: 0.95; margin-top: 10px;">More Than a Calculator — Your Complete Vision for Financial Freedom</p>
+            <p style="font-size: 0.95em; opacity: 0.85; margin-top: 8px; font-style: italic;">Where Transparency Meets Opportunity. Where Collaboration Creates Success.</p>
+        </div>
+
+        <div class="tab-navigation">
+            <button class="tab-button active" onclick="switchTab(&#39;calculator&#39;)">
+                💎 Your Success Calculator
+            </button>
+            <button class="tab-button" onclick="switchTab(&#39;framework&#39;)">
+                🤝 Our Collaborative Framework
+            </button>
+        </div>
+
+        <!-- TAB 1: CALCULATOR -->
+        <div id="calculator-tab" class="tab-content active">
+            <div class="content">
+                <div class="mode-toggle">
+                    <div class="toggle-container active" id="adminToggle" onclick="attemptAdminToggle()">
+                        <input type="checkbox" id="adminMode" style="pointer-events: none;">
+                        <span style="font-weight: 600; color: #1e3c72;">🔧 Admin Edit Mode</span>
+                    </div>
+                </div>
+
+                <div class="revenue-selection">
+                    <h2>Revenue Stream Configuration</h2>
+                    <p class="revenue-subtitle" id="modeDescription">Admin Mode: Edit formulas for B2C vs B2B scenarios. Changes auto-calculate.</p>
+
+                    <!-- VDC Only -->
+                    <div class="revenue-item selected" id="item_vdc">
+                        <div class="revenue-header" onclick="selectRevenue(&#39;vdc&#39;)">
+                            <input type="radio" name="revenue" value="vdc" checked="">
+                            <span class="revenue-name">VDC Only</span>
+                            <span class="revenue-display" id="display_vdc">Distribution: $2,750.00</span>
+                        </div>
+                        <div class="config-panel visible" id="panel_vdc">
+                            <div class="config-grid">
+                                <div class="config-field">
+                                    <label>💰 Revenue to Marketing Company</label>
+                                    <input type="number" step="0.01" value="5000" id="base_vdc" oninput="calculateRevenue(&#39;vdc&#39;)" class="admin-enabled">
+                                </div>
+                                <div class="config-field">
+                                    <label>📊 Field Distribution %</label>
+                                    <input type="number" step="0.01" value="55" id="pct_vdc" oninput="calculateRevenue(&#39;vdc&#39;)" class="admin-enabled">
+                                </div>
+                            </div>
+                            <div class="calculation-display">
+                                <div class="calculation-formula" id="formula_vdc">$5,000.00 × 55.00% =</div>
+                                <div class="calculation-result" id="result_vdc">$2,750.00</div>
+                                <div class="calculation-note">✓ Commission for Field Distribution</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Diploma Pro -->
+                    <div class="revenue-item" id="item_diploma">
+                        <div class="revenue-header" onclick="selectRevenue(&#39;diploma&#39;)">
+                            <input type="radio" name="revenue" value="diploma">
+                            <span class="revenue-name">Diploma Pro (Banking &amp; Finance)</span>
+                            <span class="revenue-display" id="display_diploma">Distribution: $2,640.00</span>
+                        </div>
+                        <div class="config-panel" id="panel_diploma">
+                            <div class="config-grid">
+                                <div class="config-field">
+                                    <label>💰 Tuition Fee</label>
+                                    <input type="number" step="0.01" value="12000" id="base_diploma" oninput="calculateRevenue(&#39;diploma&#39;)" class="admin-enabled">
+                                </div>
+                                <div class="config-field">
+                                    <label>📊 Field Distribution %</label>
+                                    <input type="number" step="0.01" value="22" id="pct_diploma" oninput="calculateRevenue(&#39;diploma&#39;)" class="admin-enabled">
+                                </div>
+                            </div>
+                            <div class="calculation-display">
+                                <div class="calculation-formula" id="formula_diploma">$12,000.00 × 22.00% =</div>
+                                <div class="calculation-result" id="result_diploma">$2,640.00</div>
+                                <div class="calculation-note">✓ Commission for Field Distribution</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Restructuring 101 -->
+                    <div class="revenue-item" id="item_restructuring">
+                        <div class="revenue-header" onclick="selectRevenue(&#39;restructuring&#39;)">
+                            <input type="radio" name="revenue" value="restructuring">
+                            <span class="revenue-name">Restructuring 101</span>
+                            <span class="revenue-display" id="display_restructuring">Distribution: $3,000.25</span>
+                        </div>
+                        <div class="config-panel" id="panel_restructuring">
+                            <div class="config-grid">
+                                <div class="config-field">
+                                    <label>💰 Consulting Fee Received</label>
+                                    <input type="number" step="0.01" value="5455" id="base_restructuring" oninput="calculateRevenue(&#39;restructuring&#39;)" class="admin-enabled">
+                                </div>
+                                <div class="config-field">
+                                    <label>📊 Field Distribution %</label>
+                                    <input type="number" step="0.01" value="55" id="pct_restructuring" oninput="calculateRevenue(&#39;restructuring&#39;)" class="admin-enabled">
+                                </div>
+                            </div>
+                            <div class="calculation-display">
+                                <div class="calculation-formula" id="formula_restructuring">$5,455.00 × 55.00% =</div>
+                                <div class="calculation-result" id="result_restructuring">$3,000.25</div>
+                                <div class="calculation-note">✓ Commission for Field Distribution</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mortgage Only -->
+                    <div class="revenue-item" id="item_mortgage">
+                        <div class="revenue-header" onclick="selectRevenue(&#39;mortgage&#39;)">
+                            <input type="radio" name="revenue" value="mortgage">
+                            <span class="revenue-name">Mortgage Only</span>
+                            <span class="revenue-display" id="display_mortgage">Distribution: $1,100.00</span>
+                        </div>
+                        <div class="config-panel" id="panel_mortgage">
+                            <div class="config-grid">
+                                <div class="config-field">
+                                    <label>💰 Average Commission</label>
+                                    <input type="number" step="0.01" value="2000" id="base_mortgage" oninput="calculateRevenue(&#39;mortgage&#39;)" class="admin-enabled">
+                                </div>
+                                <div class="config-field">
+                                    <label>📊 Field Distribution %</label>
+                                    <input type="number" step="0.01" value="55" id="pct_mortgage" oninput="calculateRevenue(&#39;mortgage&#39;)" class="admin-enabled">
+                                </div>
+                            </div>
+                            <div class="calculation-display">
+                                <div class="calculation-formula" id="formula_mortgage">$2,000.00 × 55.00% =</div>
+                                <div class="calculation-result" id="result_mortgage">$1,100.00</div>
+                                <div class="calculation-note">✓ Commission for Field Distribution</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insurance Life -->
+                    <div class="revenue-item" id="item_insurance">
+                        <div class="revenue-header" onclick="selectRevenue(&#39;insurance&#39;)">
+                            <input type="radio" name="revenue" value="insurance">
+                            <span class="revenue-name">Insurance Life Only</span>
+                            <span class="revenue-display" id="display_insurance">Distribution: $1,100.00</span>
+                        </div>
+                        <div class="config-panel" id="panel_insurance">
+                            <div class="config-grid">
+                                <div class="config-field">
+                                    <label>💰 Average Premium/FYC</label>
+                                    <input type="number" step="0.01" value="2000" id="base_insurance" oninput="calculateRevenue(&#39;insurance&#39;)" class="admin-enabled">
+                                </div>
+                                <div class="config-field">
+                                    <label>📊 Field Distribution %</label>
+                                    <input type="number" step="0.01" value="55" id="pct_insurance" oninput="calculateRevenue(&#39;insurance&#39;)" class="admin-enabled">
+                                </div>
+                            </div>
+                            <div class="calculation-display">
+                                <div class="calculation-formula" id="formula_insurance">$2,000.00 × 55.00% =</div>
+                                <div class="calculation-result" id="result_insurance">$1,100.00</div>
+                                <div class="calculation-note">✓ Commission for Field Distribution</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Business Line -->
+                    <div class="revenue-item" id="item_bizline">
+                        <div class="revenue-header" onclick="selectRevenue(&#39;bizline&#39;)">
+                            <input type="radio" name="revenue" value="bizline">
+                            <span class="revenue-name">Business Line of Credit</span>
+                            <span class="revenue-display" id="display_bizline">Distribution: $1,100.00</span>
+                        </div>
+                        <div class="config-panel" id="panel_bizline">
+                            <div class="config-grid">
+                                <div class="config-field">
+                                    <label>💰 Average Commission</label>
+                                    <input type="number" step="0.01" value="2000" id="base_bizline" oninput="calculateRevenue(&#39;bizline&#39;)" class="admin-enabled">
+                                </div>
+                                <div class="config-field">
+                                    <label>📊 Field Distribution %</label>
+                                    <input type="number" step="0.01" value="55" id="pct_bizline" oninput="calculateRevenue(&#39;bizline&#39;)" class="admin-enabled">
+                                </div>
+                            </div>
+                            <div class="calculation-display">
+                                <div class="calculation-formula" id="formula_bizline">$2,000.00 × 55.00% =</div>
+                                <div class="calculation-result" id="result_bizline">$1,100.00</div>
+                                <div class="calculation-note">✓ Commission for Field Distribution</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="selected-summary">
+                        <div style="color: #666; font-size: 0.9em; margin-bottom: 5px;">Selected Stream:</div>
+                        <div class="selected-summary-value">
+                            <span id="selectedStreamName">VDC Only</span> | 
+                            Avg Commission: <span id="selectedStreamAmount">$2,750.00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-inputs">
+                    <h2>Team Structure Settings</h2>
+                    <p style="margin-bottom: 20px; color: #666;">Customize team size and transaction volumes.</p>
+                    
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label>Average Gross Commission (Auto-Set)</label>
+                            <input type="number" id="avgCommission" value="2750" readonly="">
+                        </div>
+                        <div class="input-field">
+                            <label>Your Personal Transactions/Month</label>
+                            <input type="number" id="personalTrans" value="1" min="0">
+                        </div>
+                        <div class="input-field">
+                            <label>Number of Associates</label>
+                            <input type="number" id="numAssociates" value="85" min="0">
+                        </div>
+                        <div class="input-field">
+                            <label>Transactions per Associate</label>
+                            <input type="number" id="transPerAssociate" value="2" min="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label>Number of Managers</label>
+                            <input type="number" id="numManagers" value="5" min="0">
+                        </div>
+                        <div class="input-field">
+                            <label>Transactions per Manager</label>
+                            <input type="number" id="transPerManager" value="2" min="0">
+                        </div>
+                        <div class="input-field">
+                            <label>Number of Directors</label>
+                            <input type="number" id="numDirectors" value="5" min="0">
+                        </div>
+                        <div class="input-field">
+                            <label>Transactions per Director</label>
+                            <input type="number" id="transPerDirector" value="2" min="0">
+                        </div>
+                    </div>
+
+                    <div class="input-group">
+                        <div class="input-field">
+                            <label>Number of Regional Directors</label>
+                            <input type="number" id="numRDs" value="5" min="0">
+                        </div>
+                        <div class="input-field">
+                            <label>Transactions per RD</label>
+                            <input type="number" id="transPerRD" value="1" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <button class="calculate-btn" onclick="calculateAll()">Calculate Revenue Projections</button>
+
+                <div id="results" style="margin-top: 40px;"><h2 style="color: #1e3c72; margin-bottom: 30px; font-size: 2em;">Income Projections by Level</h2>
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">1. Qualified Associate</div>
+                            <div class="level-contract">33% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>3 Field Training Closed Cases</li></ul>
+                            <p style="margin-top: 10px; color: #667eea; font-weight: 600;">Min 3 Closed Cases</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 32.5%</div>
+                        <div class="income-amount">$893.75</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$893.75</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$206.41</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$893.75</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$10,725.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">2. Manager</div>
+                            <div class="level-contract">40% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>15 Closed Cases</li><li>Min 3 QAs</li></ul>
+                            <p style="margin-top: 10px; color: #667eea; font-weight: 600;">Min 15 Closed Cases</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 40.0%</div>
+                        <div class="income-amount">$1,100.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 7.5%</div>
+                        <div class="income-amount">$35,062.50</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$36,162.50</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$8,351.62</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$36,162.50</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$433,950.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">3. Director</div>
+                            <div class="level-contract">50% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>33 Closed Cases</li><li>Min 5 QAs</li><li>Max 50% one leg</li></ul>
+                            <p style="margin-top: 10px; color: #667eea; font-weight: 600;">Min 33 Closed Cases</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 50.0%</div>
+                        <div class="income-amount">$1,375.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 17.5%</div>
+                        <div class="income-amount">$81,812.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Managers</div>
+                        <div class="income-calculation">10 × $2,750.00 × 10.0%</div>
+                        <div class="income-amount">$2,750.00</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$85,937.50</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$19,847.00</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$85,937.50</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$1,031,250.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">4. Regional Director</div>
+                            <div class="level-contract">65% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>126 Closed Cases</li><li>Min 7 QAs</li><li>Max 33% one leg</li></ul>
+                            <p style="margin-top: 10px; color: #667eea; font-weight: 600;">Min 126 Closed Cases</p>
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 65.0%</div>
+                        <div class="income-amount">$1,787.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 32.5%</div>
+                        <div class="income-amount">$151,937.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Managers</div>
+                        <div class="income-calculation">10 × $2,750.00 × 25.0%</div>
+                        <div class="income-amount">$6,875.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Directors</div>
+                        <div class="income-calculation">10 × $2,750.00 × 15.0%</div>
+                        <div class="income-amount">$4,125.00</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$164,725.00</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$38,042.73</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$164,725.00</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$1,976,700.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">5. Silver Regional Director</div>
+                            <div class="level-contract">70% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>2 Direct RD + Base Shop</li></ul>
+                            
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 70.0%</div>
+                        <div class="income-amount">$1,925.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 37.5%</div>
+                        <div class="income-amount">$175,312.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Managers</div>
+                        <div class="income-calculation">10 × $2,750.00 × 30.0%</div>
+                        <div class="income-amount">$8,250.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Directors</div>
+                        <div class="income-calculation">10 × $2,750.00 × 20.0%</div>
+                        <div class="income-amount">$5,500.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 RDs</div>
+                        <div class="income-calculation">5 × $2,750.00 × 5.0%</div>
+                        <div class="income-amount">$687.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">RD Override</div>
+                        <div class="income-calculation">5 × $2,750.00 × 4.0%</div>
+                        <div class="income-amount">$550.00</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$192,225.00</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$44,393.76</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$192,225.00</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$2,306,700.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">6. Gold Regional Director</div>
+                            <div class="level-contract">75% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>4 Direct RDs + Base Shop</li></ul>
+                            
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 75.0%</div>
+                        <div class="income-amount">$2,062.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 42.5%</div>
+                        <div class="income-amount">$198,687.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Managers</div>
+                        <div class="income-calculation">10 × $2,750.00 × 35.0%</div>
+                        <div class="income-amount">$9,625.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Directors</div>
+                        <div class="income-calculation">10 × $2,750.00 × 25.0%</div>
+                        <div class="income-amount">$6,875.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 RDs</div>
+                        <div class="income-calculation">5 × $2,750.00 × 10.0%</div>
+                        <div class="income-amount">$1,375.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">RD Override</div>
+                        <div class="income-calculation">5 × $2,750.00 × 4.0%</div>
+                        <div class="income-amount">$550.00</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$219,175.00</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$50,617.78</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$219,175.00</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$2,630,100.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">7. Senior Regional Director</div>
+                            <div class="level-contract">80% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>6 Direct RDs + Base Shop</li><li>Min 10 QAs Wide</li></ul>
+                            
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 80.0%</div>
+                        <div class="income-amount">$2,200.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 47.5%</div>
+                        <div class="income-amount">$222,062.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Managers</div>
+                        <div class="income-calculation">10 × $2,750.00 × 40.0%</div>
+                        <div class="income-amount">$11,000.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Directors</div>
+                        <div class="income-calculation">10 × $2,750.00 × 30.0%</div>
+                        <div class="income-amount">$8,250.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 RDs</div>
+                        <div class="income-calculation">5 × $2,750.00 × 15.0%</div>
+                        <div class="income-amount">$2,062.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">RD Override</div>
+                        <div class="income-calculation">5 × $2,750.00 × 4.0%</div>
+                        <div class="income-amount">$550.00</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$246,125.00</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$56,841.80</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$246,125.00</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$2,953,500.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">8. National Regional Director</div>
+                            <div class="level-contract">85% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>10 RDs (7 Direct, 3 Indirect)</li><li>Min 15 QAs Wide</li></ul>
+                            
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 85.0%</div>
+                        <div class="income-amount">$2,337.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 52.5%</div>
+                        <div class="income-amount">$245,437.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Managers</div>
+                        <div class="income-calculation">10 × $2,750.00 × 45.0%</div>
+                        <div class="income-amount">$12,375.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Directors</div>
+                        <div class="income-calculation">10 × $2,750.00 × 35.0%</div>
+                        <div class="income-amount">$9,625.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 RDs</div>
+                        <div class="income-calculation">5 × $2,750.00 × 20.0%</div>
+                        <div class="income-amount">$2,750.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">RD Override</div>
+                        <div class="income-calculation">5 × $2,750.00 × 4.0%</div>
+                        <div class="income-amount">$550.00</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$273,075.00</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$63,065.82</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$273,075.00</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$3,276,900.00</div>
+                            </div>
+                        </div>
+                    </div>
+                
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">9. Executive Platinum RD</div>
+                            <div class="level-contract">90% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul><li>15 RDs (10 Direct, 5 Indirect)</li><li>Min 25 QAs Wide</li></ul>
+                            
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            
+                    <div class="income-row">
+                        <div class="income-source">Personal Production</div>
+                        <div class="income-calculation">1 × $2,750.00 × 90.0%</div>
+                        <div class="income-amount">$2,475.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">85 Associates</div>
+                        <div class="income-calculation">170 × $2,750.00 × 57.5%</div>
+                        <div class="income-amount">$268,812.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Managers</div>
+                        <div class="income-calculation">10 × $2,750.00 × 50.0%</div>
+                        <div class="income-amount">$13,750.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 Directors</div>
+                        <div class="income-calculation">10 × $2,750.00 × 40.0%</div>
+                        <div class="income-amount">$11,000.00</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">5 RDs</div>
+                        <div class="income-calculation">5 × $2,750.00 × 25.0%</div>
+                        <div class="income-amount">$3,437.50</div>
+                    </div>
+                
+                    <div class="income-row">
+                        <div class="income-source">RD Override</div>
+                        <div class="income-calculation">5 × $2,750.00 × 4.0%</div>
+                        <div class="income-amount">$550.00</div>
+                    </div>
+                
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">$300,025.00</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">$69,289.84</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">$300,025.00</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">$3,600,300.00</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="disclaimer">
+                    <h3>⚠️ Essential Understanding: The Complete Picture</h3>
+                    
+                    <p style="font-size: 1.05em; margin-bottom: 20px;"><strong>This Tool is Designed to Be THE Eye Opener</strong></p>
+                    
+                    <p><strong>What This Calculator Truly Represents:</strong></p>
+                    <p style="margin-bottom: 15px;">This is not merely a calculator—it's a transparency framework. The projections you see are based on a Direct Sales Compensation structure that has evolved into a sophisticated Hybrid Opportunity model. Every number, every percentage, every pathway shown here reflects our commitment to complete visibility in an industry where such transparency is rare.</p>
+                    
+                    <p><strong>Critical Realities You Must Understand:</strong></p>
+                    <ul style="margin-bottom: 20px;">
+                        <li><strong>No Guarantees Exist:</strong> There is absolutely NO guarantee of income, earnings, or success. The numbers shown are possibilities, not promises. Your actual results will be determined entirely by your effort, skill, dedication, market conditions, timing, and countless other factors beyond anyone's control.</li>
+                        
+                        <li><strong>Success Requires Real Work:</strong> The associates who achieve the income levels shown here work extremely hard. They prospect consistently, handle rejection professionally, continuously learn and improve their skills, build and support their teams, and treat this as a serious business—not a hobby. If you're not prepared to do the same, your results will differ dramatically.</li>
+                        
+                        <li><strong>Variable Revenue Streams:</strong> The revenue streams and distribution percentages shown can vary based on whether you're serving B2C (business-to-consumer) or B2B (business-to-business) clients, which specific products you sell, which carriers you work with, and how market conditions evolve. The 55% field distribution is our commitment, but individual product commissions vary.</li>
+                        
+                        <li><strong>Time Investment is Substantial:</strong> Building to the higher qualification levels (Regional Director and above) typically requires 2-5 years of consistent, focused effort. It demands recruiting, training, supporting a team, and maintaining personal production. Most people never reach these levels—not because the system doesn't work, but because they don't invest the required time and effort.</li>
+                        
+                        <li><strong>Expenses Exist:</strong> Running this business involves real costs: licensing fees, continuing education, marketing expenses, technology tools, travel to appointments, professional development, and more. Your net income will be your gross commissions minus these expenses. Budget accordingly.</li>
+                        
+                        <li><strong>Regulatory Compliance is Non-Negotiable:</strong> You must obtain and maintain proper licensing for every product you sell. You must follow all provincial and federal regulations. You must conduct business ethically and compliantly. Violations can result in fines, license suspension, or termination. This is serious professional responsibility.</li>
+                        
+                        <li><strong>Market Conditions Change:</strong> Economic downturns, regulatory changes, competitive pressures, and shifting consumer preferences all impact your ability to generate the income shown. What works today may need adjustment tomorrow. Adaptability is essential.</li>
+                        
+                        <li><strong>Team Building is Challenging:</strong> The override income shown assumes you successfully recruit, train, and retain productive team members. In reality, many recruits don't complete licensing, many licensed associates don't produce consistently, and attrition is a constant factor. Building a sustainable team requires leadership skills many people must develop over time.</li>
+                    </ul>
+                    
+                    <p><strong>Why We Show You This Anyway:</strong></p>
+                    <p style="margin-bottom: 15px;">Despite all these caveats, we believe you deserve to see the complete framework. You deserve to understand how the compensation works, what's possible if you succeed, and what the path looks like. Most companies don't provide this level of detail because it opens them to scrutiny. We provide it because transparency builds trust, and trust builds lasting relationships.</p>
+                    
+                    <p><strong>The Honest Truth About This Opportunity:</strong></p>
+                    <p style="margin-bottom: 15px;">This is a legitimate business opportunity for people willing to work hard, learn continuously, handle rejection, support others, and think long-term. It is NOT a get-rich-quick scheme, NOT a guarantee of income, NOT suitable for everyone, and NOT a replacement for due diligence. If someone promises you easy money or guaranteed results, run away—they're lying.</p>
+                    
+                    <p><strong>Your Responsibility:</strong></p>
+                    <p style="margin-bottom: 15px;">Before making any business decision based on these projections:</p>
+                    <ul style="margin-bottom: 20px;">
+                        <li>Consult with qualified financial advisors about your personal situation</li>
+                        <li>Speak with legal counsel about business structure and liability</li>
+                        <li>Discuss tax implications with your accountant or tax professional</li>
+                        <li>Talk to current VDC associates about their real experiences (both successes and challenges)</li>
+                        <li>Review all agreements and compensation plans thoroughly before signing anything</li>
+                        <li>Ensure you have adequate financial reserves to sustain yourself during the building phase</li>
+                        <li>Make decisions based on facts, not emotions or pressure from anyone</li>
+                    </ul>
+                    
+                    <p><strong>About Income Disclosure:</strong></p>
+                    <p style="margin-bottom: 15px;">Industry data consistently shows that most people in direct sales and hybrid models earn modest incomes or fail to earn anything at all. The high earners you see recognized at events and on social media represent a small percentage of total participants. If we publish formal income disclosure statements, please review them carefully—they tell important truths about actual results.</p>
+                    
+                    <p><strong>Our Commitment to You:</strong></p>
+                    <p style="margin-bottom: 15px;">VDC commits to providing you with transparent information, comprehensive training, ongoing support, ethical leadership, and a compensation structure that rewards your effort fairly. We cannot commit to your success—that's entirely up to you. But we can commit to treating you with integrity every step of the way, whether you earn $10,000 or $1,000,000, whether you stay one month or twenty years.</p>
+                    
+                    <p><strong>The Bottom Line:</strong></p>
+                    <p style="margin-bottom: 20px; font-weight: 600; font-size: 1.05em;">This calculator shows you what's possible. Your effort, skill, persistence, and circumstances will determine what's actual. We show you the mountain and the path to climb it. Whether you reach the summit depends entirely on you.</p>
+                    
+                    <p style="margin-top: 20px; padding-top: 20px; border-top: 2px solid #ffc107;">
+                        <strong>Questions or Concerns?</strong> If anything about these projections, the compensation structure, or the opportunity itself is unclear, please ask. We'd rather answer 100 questions upfront than have you feel misled later. Transparency isn't just about showing numbers—it's about ensuring understanding.
+                    </p>
+                    
+                    <p style="margin-top: 25px; font-weight: 600; font-size: 0.95em; text-align: center;">
+                        © Virtual Development Centre. All rights reserved.<br>
+                        <span style="font-size: 0.85em; opacity: 0.8;">Built on Transparency. Sustained by Integrity. Driven by Your Success.</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: FRAMEWORK -->
+        <div id="framework-tab" class="tab-content">
+            <div class="framework-content">
+                
+                <div class="framework-hero">
+                    <h2>The Question Isn't Whether This Works.</h2>
+                    <p>The question is: Are you ready to be part of what works?</p>
+                    <div class="big-numbers">
+                        <div class="big-number">
+                            <div class="big-number-value">55%</div>
+                            <div class="big-number-label">Your Income Opportunity</div>
+                        </div>
+                        <div class="big-number">
+                            <div class="big-number-value">45%</div>
+                            <div class="big-number-label">Infrastructure Supporting You</div>
+                        </div>
+                        <div class="big-number">
+                            <div class="big-number-value">100%</div>
+                            <div class="big-number-label">Complete Sustainable System</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 class="section-title">Understanding Industry Options: Context for Your Success</h2>
+
+                <div class="comparison-grid">
+                    <div class="comparison-card bad">
+                        <h3>⚡ Traditional Approaches</h3>
+                        <ul>
+                            <li>Sales Comp: Varies widely</li>
+                            <li>Marketing &amp; Operations: Often combined</li>
+                            <li>Structure: May be less visible to field</li>
+                            <li><strong>Reality:</strong> Many excellent companies operate this way successfully</li>
+                        </ul>
+                    </div>
+                    <div class="comparison-card good">
+                        <h3>✨ VDC Collaborative Model</h3>
+                        <ul>
+                            <li>Field Distribution: 55% (crystal clear)</li>
+                            <li>Operations &amp; Growth: 45% (fully transparent)</li>
+                            <li><strong>Our Approach:</strong> Complete visibility for informed decisions</li>
+                            <li><strong>Our Goal:</strong> Help the entire industry elevate through collaboration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout-box">
+                    Many organizations have their own approaches to compensation, and that's perfectly valid. At VDC, we believe that complete transparency helps everyone make better decisions. We're not here to compete—we're here to collaborate and contribute to raising industry standards together. When one succeeds, we all benefit.
+                </div>
+
+                <h2 class="section-title">Where Your 55% Goes</h2>
+
+                <div class="breakdown-card field">
+                    <div class="breakdown-percentage">49.5%</div>
+                    <div class="breakdown-title">DIRECTLY TO YOUR POCKET</div>
+                    <div class="breakdown-description">
+                        This is YOUR compensation, YOUR overrides, YOUR team-building income, YOUR path to financial freedom.
+                    </div>
+                    <div class="breakdown-details">
+                        <ul>
+                            <li>Qualified Associate: 32.5%</li>
+                            <li>Manager: 40%</li>
+                            <li>Director: 50%</li>
+                            <li>Regional Director: 65%</li>
+                            <li>Silver RD: 70%</li>
+                            <li>Gold RD: 75%</li>
+                            <li>Senior RD: 80%</li>
+                            <li>National RD: 85%</li>
+                            <li>Executive Platinum RD: 90%</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="breakdown-card culture">
+                    <div class="breakdown-percentage">5.5%</div>
+                    <div class="breakdown-title">BUILDING THE CULTURE</div>
+                    <div class="breakdown-description">
+                        This is YOUR recognition, YOUR events, YOUR trips, YOUR awards, YOUR community.
+                    </div>
+                    <div class="breakdown-details">
+                        <ul>
+                            <li>Quarterly recognition events</li>
+                            <li>Annual achievement trips to exotic destinations</li>
+                            <li>Leadership conferences with industry experts</li>
+                            <li>Awards and public acknowledgment</li>
+                            <li>Team-building experiences</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="callout-box">
+                    The entire 55% is designed around ONE question: How do we make sure the people building this business are rewarded, recognized, and supported every step of the way?
+                </div>
+
+                <h2 class="section-title">Answering Your Questions</h2>
+
+                <div class="objection-item">
+                    <div class="objection-q">"Isn't 55% too high to be sustainable?"</div>
+                    <div class="objection-a">
+                        <strong>Wrong question. Let's do the math:</strong><br><br>
+                        Traditional Financial Services: Sales (35%) + Marketing (20%) + Operations (45%) = 100%<br>
+                        VDC: Field (sales + culture) (55%) + Operations (45%) = 100%<br><br>
+                        We're actually MORE efficient. We just package it differently. Plus our revenue-sharing partnerships reduce fixed costs, and our 45% allocation is HIGHER than most competitors' operations budgets.<br><br>
+                        <strong>Result: More sustainable, not less.</strong>
+                    </div>
+                </div>
+
+                <div class="objection-item">
+                    <div class="objection-q">"What if the company fails?"</div>
+                    <div class="objection-a">
+                        <strong>Here's what protects you:</strong><br><br>
+                        ✓ 45% operations = strong foundation<br>
+                        ✓ Revenue-sharing partners = aligned interests<br>
+                        ✓ Multiple revenue streams = diversification<br>
+                        ✓ Transparent model = you see everything<br>
+                        ✓ Proven structure = tested approach<br><br>
+                        But here's the real answer: The company succeeds BECAUSE of the 55/45 split. Not in spite of it.
+                    </div>
+                </div>
+
+                <div class="vision-section">
+                    <h3>This Is Bigger Than Percentages</h3>
+                    <p>Yes, 55% goes to field distribution. Yes, 45% funds operations.</p>
+                    <p>But here's what those numbers REALLY mean:</p>
+                    <div class="vision-grid">
+                        <div class="vision-item">
+                            <h4>55% MEANS</h4>
+                            <p>You control your financial future. Hard work = predictable rewards. Team building = exponential income.</p>
+                        </div>
+                        <div class="vision-item">
+                            <h4>45% MEANS</h4>
+                            <p>Technology that empowers you. Compliance that protects you. Innovation that keeps you ahead.</p>
+                        </div>
+                        <div class="vision-item">
+                            <h4>TOGETHER THEY MEAN</h4>
+                            <p>Financial education accessible to everyone. Families achieving freedom. Generational wealth built.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="cta-final">
+                    <h3>Your Path Forward: An Invitation to Collaborate</h3>
+                    <div class="cta-options">
+                        <div class="cta-option bad">
+                            <h4>Your Current Path</h4>
+                            <ul>
+                                <li>⚡ Existing compensation structure</li>
+                                <li>⚡ Established relationships and systems</li>
+                                <li>⚡ Proven track record</li>
+                                <li>⚡ Comfort of familiarity</li>
+                            </ul>
+                            <p><strong>Value:</strong> There's merit in staying with what's working. Many find success in traditional models.</p>
+                        </div>
+                        <div class="cta-option good">
+                            <h4>The VDC Collaborative Vision</h4>
+                            <ul>
+                                <li>✓ Complete financial transparency</li>
+                                <li>✓ Clear 9-level qualification path</li>
+                                <li>✓ 55% field compensation (visible always)</li>
+                                <li>✓ 45% operations building scalable infrastructure</li>
+                                <li>✓ Collaborative HUB philosophy</li>
+                                <li>✓ Law of increase—we lift as we rise</li>
+                            </ul>
+                            <p><strong>Purpose:</strong> Create something better together. Your success amplifies everyone's success.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: white; color: #1e3c72; padding: 40px; border-radius: 12px; margin: 40px 0;">
+                        <h3 style="font-size: 2em; margin-bottom: 20px;">The Law of Increase in Action</h3>
+                        <p style="font-size: 1.2em; line-height: 1.8; margin-bottom: 20px;">
+                            VDC operates on a fundamental principle: when we help others succeed, we all rise together. 
+                            The calculator showed you the financial framework (55% Field). This transparency showed you 
+                            why it's sustainable (45% Operations). Together, they prove our commitment to collaboration over competition.
+                        </p>
+                        <p style="font-size: 1.1em; line-height: 1.8; font-style: italic; opacity: 0.9;">
+                            Others may replicate our aesthetics—the look, the numbers, the structure. But our methodology? 
+                            That comes from a genuine commitment to leaving everyone better than we found them. 
+                            We're not here to disrupt. We're here to contribute, collaborate, and co-create success.
+                        </p>
+                    </div>
+
+                    <button class="cta-button" onclick="alert(&#39;Contact your VDC representative to explore collaboration opportunities!&#39;)">🤝 Let's Build Together</button>
+
+                    <p style="font-size: 1.3em; margin-top: 40px; opacity: 0.9; line-height: 1.6;">
+                        Many organizations offer valid paths to success. VDC offers something additional: 
+                        a collaborative framework where transparency isn't just promised—it's delivered.<br><br>
+                        <strong style="color: #ffc107;">We don't compete. We collaborate. We contribute. We elevate.</strong><br>
+                        That's the VDC difference.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© Virtual Development Centre - Building Financial Futures Together</p>
+            <p style="margin-top: 10px; opacity: 0.9;">🤝 Collaboration Over Competition • 📈 The Law of Increase • 💎 Transparency as Standard</p>
+            <p style="margin-top: 8px; opacity: 0.8; font-size: 0.9em;">Where 55% Rewards You Today and 45% Builds Everyone's Tomorrow</p>
+        </div>
+    </div>
+
+    <script>
+        const ADMIN_PASSCODE = "VDC2025";
+        let adminModeActive = false;
+        let currentSelectedRevenue = 'vdc';
+
+        const revenueNames = {
+            vdc: 'VDC Only',
+            diploma: 'Diploma Pro (Banking & Finance)',
+            restructuring: 'Restructuring 101',
+            mortgage: 'Mortgage Only',
+            insurance: 'Insurance Life Only',
+            bizline: 'Business Line of Credit'
+        };
+
+        const qualificationLevels = [
+            { title: 'Qualified Associate', contract: 0.325, closedCases: 3, requirements: ['3 Field Training Closed Cases'], associateSpread: 0, mgrSpread: 0, dirSpread: 0, rdSpread: 0, rdOverride: 0 },
+            { title: 'Manager', contract: 0.40, closedCases: 15, requirements: ['15 Closed Cases', 'Min 3 QAs'], associateSpread: 0.075, mgrSpread: 0, dirSpread: 0, rdSpread: 0, rdOverride: 0.04 },
+            { title: 'Director', contract: 0.50, closedCases: 33, requirements: ['33 Closed Cases', 'Min 5 QAs', 'Max 50% one leg'], associateSpread: 0.175, mgrSpread: 0.10, dirSpread: 0, rdSpread: 0, rdOverride: 0.04 },
+            { title: 'Regional Director', contract: 0.65, closedCases: 126, requirements: ['126 Closed Cases', 'Min 7 QAs', 'Max 33% one leg'], associateSpread: 0.325, mgrSpread: 0.25, dirSpread: 0.15, rdSpread: 0, rdOverride: 0.04 },
+            { title: 'Silver Regional Director', contract: 0.70, closedCases: null, requirements: ['2 Direct RD + Base Shop'], associateSpread: 0.375, mgrSpread: 0.30, dirSpread: 0.20, rdSpread: 0.05, rdOverride: 0.04 },
+            { title: 'Gold Regional Director', contract: 0.75, closedCases: null, requirements: ['4 Direct RDs + Base Shop'], associateSpread: 0.425, mgrSpread: 0.35, dirSpread: 0.25, rdSpread: 0.10, rdOverride: 0.04 },
+            { title: 'Senior Regional Director', contract: 0.80, closedCases: null, requirements: ['6 Direct RDs + Base Shop', 'Min 10 QAs Wide'], associateSpread: 0.475, mgrSpread: 0.40, dirSpread: 0.30, rdSpread: 0.15, rdOverride: 0.04 },
+            { title: 'National Regional Director', contract: 0.85, closedCases: null, requirements: ['10 RDs (7 Direct, 3 Indirect)', 'Min 15 QAs Wide'], associateSpread: 0.525, mgrSpread: 0.45, dirSpread: 0.35, rdSpread: 0.20, rdOverride: 0.04 },
+            { title: 'Executive Platinum RD', contract: 0.90, closedCases: null, requirements: ['15 RDs (10 Direct, 5 Indirect)', 'Min 25 QAs Wide'], associateSpread: 0.575, mgrSpread: 0.50, dirSpread: 0.40, rdSpread: 0.25, rdOverride: 0.04 }
+        ];
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+            
+            document.getElementById(tabName + '-tab').classList.add('active');
+            event.target.classList.add('active');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function formatCurrency(amount) {
+            return '$' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        }
+
+        function attemptAdminToggle() {
+            if (!adminModeActive) {
+                const userInput = prompt("🔐 Admin Access Required\n\nEnter admin passcode:", "");
+                if (userInput === null) return;
+                if (userInput !== ADMIN_PASSCODE) {
+                    alert("❌ Incorrect passcode.");
+                    return;
+                }
+                adminModeActive = true;
+                document.getElementById('adminMode').checked = true;
+                document.getElementById('adminToggle').classList.add('active');
+                enableAdminMode();
+            } else {
+                adminModeActive = false;
+                document.getElementById('adminMode').checked = false;
+                document.getElementById('adminToggle').classList.remove('active');
+                disableAdminMode();
+            }
+        }
+
+        function enableAdminMode() {
+            document.getElementById('modeDescription').textContent = 'Admin Mode: Edit formulas for B2C vs B2B scenarios. Changes auto-calculate.';
+            document.querySelectorAll('.config-panel input').forEach(input => {
+                input.disabled = false;
+                input.classList.add('admin-enabled');
+            });
+        }
+
+        function disableAdminMode() {
+            document.getElementById('modeDescription').textContent = 'Select a revenue stream. Admin mode required to edit formulas (B2C vs B2B adjustments).';
+            document.querySelectorAll('.config-panel input').forEach(input => {
+                input.disabled = true;
+                input.classList.remove('admin-enabled');
+            });
+        }
+
+        function calculateRevenue(streamId) {
+            const base = parseFloat(document.getElementById(`base_${streamId}`).value) || 0;
+            const pct = parseFloat(document.getElementById(`pct_${streamId}`).value) || 0;
+            const result = base * (pct / 100);
+
+            document.getElementById(`formula_${streamId}`).textContent = `${formatCurrency(base)} × ${pct.toFixed(2)}% =`;
+            document.getElementById(`result_${streamId}`).textContent = formatCurrency(result);
+            document.getElementById(`display_${streamId}`).textContent = `Distribution: ${formatCurrency(result)}`;
+
+            if (currentSelectedRevenue === streamId) {
+                updateSelectedSummary(streamId, result);
+            }
+        }
+
+        function selectRevenue(streamId) {
+            document.querySelectorAll('.revenue-item').forEach(item => item.classList.remove('selected'));
+            document.querySelectorAll('.config-panel').forEach(panel => panel.classList.remove('visible'));
+
+            document.getElementById(`item_${streamId}`).classList.add('selected');
+            document.getElementById(`panel_${streamId}`).classList.add('visible');
+            document.querySelector(`input[value="${streamId}"]`).checked = true;
+
+            currentSelectedRevenue = streamId;
+
+            const base = parseFloat(document.getElementById(`base_${streamId}`).value) || 0;
+            const pct = parseFloat(document.getElementById(`pct_${streamId}`).value) || 0;
+            updateSelectedSummary(streamId, base * (pct / 100));
+        }
+
+        function updateSelectedSummary(streamId, commission) {
+            document.getElementById('selectedStreamName').textContent = revenueNames[streamId];
+            document.getElementById('selectedStreamAmount').textContent = formatCurrency(commission);
+            document.getElementById('avgCommission').value = commission.toFixed(2);
+        }
+
+        function calculateLevelIncome(level, avgComm, inputs) {
+            let total = 0;
+            const breakdown = [];
+
+            const personalComm = inputs.personalTrans * avgComm * level.contract;
+            breakdown.push({ source: 'Personal Production', calc: `${inputs.personalTrans} × ${formatCurrency(avgComm)} × ${(level.contract*100).toFixed(1)}%`, amount: personalComm });
+            total += personalComm;
+
+            if (level.associateSpread > 0) {
+                const assocTrans = inputs.numAssociates * inputs.transPerAssociate;
+                const assocComm = assocTrans * avgComm * level.associateSpread;
+                breakdown.push({ source: `${inputs.numAssociates} Associates`, calc: `${assocTrans} × ${formatCurrency(avgComm)} × ${(level.associateSpread*100).toFixed(1)}%`, amount: assocComm });
+                total += assocComm;
+            }
+
+            if (level.mgrSpread > 0) {
+                const mgrTrans = inputs.numManagers * inputs.transPerManager;
+                const mgrComm = mgrTrans * avgComm * level.mgrSpread;
+                breakdown.push({ source: `${inputs.numManagers} Managers`, calc: `${mgrTrans} × ${formatCurrency(avgComm)} × ${(level.mgrSpread*100).toFixed(1)}%`, amount: mgrComm });
+                total += mgrComm;
+            }
+
+            if (level.dirSpread > 0) {
+                const dirTrans = inputs.numDirectors * inputs.transPerDirector;
+                const dirComm = dirTrans * avgComm * level.dirSpread;
+                breakdown.push({ source: `${inputs.numDirectors} Directors`, calc: `${dirTrans} × ${formatCurrency(avgComm)} × ${(level.dirSpread*100).toFixed(1)}%`, amount: dirComm });
+                total += dirComm;
+            }
+
+            if (level.rdSpread > 0) {
+                const rdTrans = inputs.numRDs * inputs.transPerRD;
+                const rdComm = rdTrans * avgComm * level.rdSpread;
+                breakdown.push({ source: `${inputs.numRDs} RDs`, calc: `${rdTrans} × ${formatCurrency(avgComm)} × ${(level.rdSpread*100).toFixed(1)}%`, amount: rdComm });
+                total += rdComm;
+
+                if (level.rdOverride > 0) {
+                    const rdOver = rdTrans * avgComm * level.rdOverride;
+                    breakdown.push({ source: 'RD Override', calc: `${rdTrans} × ${formatCurrency(avgComm)} × ${(level.rdOverride*100).toFixed(1)}%`, amount: rdOver });
+                    total += rdOver;
+                }
+            }
+
+            return { breakdown, monthlyTotal: total, weeklyTotal: total/4.33, annualTotal: total*12 };
+        }
+
+        function calculateAll(shouldScroll = false) {
+            const avgComm = parseFloat(document.getElementById('avgCommission').value) || 0;
+            
+            // FIXED: Properly handle 0 as valid input (not reverting to defaults)
+            const getInputValue = (id, defaultVal) => {
+                const val = parseFloat(document.getElementById(id).value);
+                return isNaN(val) ? defaultVal : val;
+            };
+            
+            const inputs = {
+                personalTrans: getInputValue('personalTrans', 1),
+                numAssociates: getInputValue('numAssociates', 85),
+                transPerAssociate: getInputValue('transPerAssociate', 2),
+                numManagers: getInputValue('numManagers', 5),
+                transPerManager: getInputValue('transPerManager', 2),
+                numDirectors: getInputValue('numDirectors', 5),
+                transPerDirector: getInputValue('transPerDirector', 2),
+                numRDs: getInputValue('numRDs', 5),
+                transPerRD: getInputValue('transPerRD', 1)
+            };
+
+            let html = '<h2 style="color: #1e3c72; margin-bottom: 30px; font-size: 2em;">Income Projections by Level</h2>';
+            
+            qualificationLevels.forEach((level, index) => {
+                const income = calculateLevelIncome(level, avgComm, inputs);
+                const breakdownHTML = income.breakdown.map(b => `
+                    <div class="income-row">
+                        <div class="income-source">${b.source}</div>
+                        <div class="income-calculation">${b.calc}</div>
+                        <div class="income-amount">${formatCurrency(b.amount)}</div>
+                    </div>
+                `).join('');
+
+                html += `
+                    <div class="level-card">
+                        <div class="level-header">
+                            <div class="level-title">${index + 1}. ${level.title}</div>
+                            <div class="level-contract">${(level.contract*100).toFixed(0)}% Contract</div>
+                        </div>
+                        <div class="level-requirements">
+                            <h4 style="color: #1e3c72; margin-bottom: 10px;">Qualification:</h4>
+                            <ul>${level.requirements.map(r => `<li>${r}</li>`).join('')}</ul>
+                            ${level.closedCases ? `<p style="margin-top: 10px; color: #667eea; font-weight: 600;">Min ${level.closedCases} Closed Cases</p>` : ''}
+                        </div>
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Income Breakdown:</h4>
+                            ${breakdownHTML}
+                            <div class="income-row total-row">
+                                <div class="income-source" style="color: #1e3c72;">Total Monthly</div>
+                                <div class="income-calculation"></div>
+                                <div class="income-amount" style="color: #1e3c72; font-size: 1.5em;">${formatCurrency(income.monthlyTotal)}</div>
+                            </div>
+                        </div>
+                        <div class="annual-projections">
+                            <div class="projection-card">
+                                <div class="projection-label">Weekly</div>
+                                <div class="projection-value">${formatCurrency(income.weeklyTotal)}</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Monthly</div>
+                                <div class="projection-value">${formatCurrency(income.monthlyTotal)}</div>
+                            </div>
+                            <div class="projection-card">
+                                <div class="projection-label">Annual</div>
+                                <div class="projection-value">${formatCurrency(income.annualTotal)}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('results').innerHTML = html;
+            
+            // FIXED: Only scroll to results when Calculate button is clicked, not on every keystroke
+            if (shouldScroll) {
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        window.addEventListener('load', function() {
+            calculateRevenue('vdc');
+            calculateRevenue('diploma');
+            calculateRevenue('restructuring');
+            calculateRevenue('mortgage');
+            calculateRevenue('insurance');
+            calculateRevenue('bizline');
+
+            updateSelectedSummary('vdc', 2750);
+            setTimeout(() => calculateAll(false), 500);
+
+            // FIXED: Add event listeners for team structure inputs - real-time calculation WITHOUT scrolling
+            const teamInputs = [
+                'personalTrans', 'numAssociates', 'transPerAssociate',
+                'numManagers', 'transPerManager', 'numDirectors',
+                'transPerDirector', 'numRDs', 'transPerRD', 'avgCommission'
+            ];
+            
+            teamInputs.forEach(inputId => {
+                const element = document.getElementById(inputId);
+                if (element) {
+                    element.addEventListener('input', () => calculateAll(false));
+                }
+            });
+
+            // FIXED: Calculate button scrolls to results, input changes don't
+            const calcButton = document.querySelector('.calculate-btn');
+            if (calcButton) {
+                calcButton.addEventListener('click', () => calculateAll(true));
+            }
+        });
+    </script>
+
+
+</body></html>
